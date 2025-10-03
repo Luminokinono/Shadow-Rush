@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://b6801q12alyib"]
+
+[ext_resource type="Script" uid="uid://bl5sif3i1yf4t" path="res://piece.gd" id="1_hisf2"]
+[ext_resource type="Texture2D" uid="uid://cy3ejiwuupx6c" path="res://piece.png" id="2_sk825"]
+[ext_resource type="AudioStream" uid="uid://momabdh63w83" path="res://coin-drop-on-concrete-103555.wav" id="3_sk825"]
+[ext_resource type="Texture2D" uid="uid://b2mobt6ur780i" path="res://kunai doree.png" id="4_y1xrd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y1xrd"]
+radius = 92.4392
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sk825"]
+particle_flag_disable_z = true
+initial_velocity_min = 150.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.3
+
+[node name="Piece" type="Area2D"]
+script = ExtResource("1_hisf2")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(329.5, -332)
+scale = Vector2(0.356445, 0.351563)
+texture = ExtResource("2_sk825")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(329, -333)
+shape = SubResource("CircleShape2D_y1xrd")
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_sk825")
+
+[node name="Sparkle" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 20
+texture = ExtResource("4_y1xrd")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_sk825")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_Piece_body_entered"]
