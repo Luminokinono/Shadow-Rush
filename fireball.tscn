@@ -1,0 +1,120 @@
+[gd_scene load_steps=9 format=3 uid="uid://bdkoocvitb3us"]
+
+[ext_resource type="Script" uid="uid://b7ltemhlhnw2q" path="res://fireball.gd" id="1_olwj8"]
+[ext_resource type="Texture2D" uid="uid://ude0rf6m0a60" path="res://fireball.png" id="2_wdani"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nix7o"]
+radius = 265.912
+
+[sub_resource type="Animation" id="Animation_lk87q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 5000)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.14159]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, 5133)]
+}
+
+[sub_resource type="Animation" id="Animation_smijy"]
+resource_name = "feu_loop"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1.7411, 17.1484, 1),
+"update": 0,
+"values": [Vector2(0, 8000), Vector2(0, 0), Vector2(0, 8000)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [3.14159, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1.74, 17.1, 1),
+"update": 0,
+"values": [Vector2(10, 8133), Vector2(0, 0), Vector2(10, 8133)]
+}
+
+[sub_resource type="Animation" id="Animation_m4vqi"]
+resource_name = "jaillissement"
+
+[sub_resource type="Animation" id="Animation_gveuj"]
+resource_name = "va_et_vient"
+length = 2.0
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l1q1f"]
+_data = {
+&"RESET": SubResource("Animation_lk87q"),
+&"feu_loop": SubResource("Animation_smijy"),
+&"jaillissement": SubResource("Animation_m4vqi"),
+&"va_et_vient": SubResource("Animation_gveuj")
+}
+
+[node name="Fireball" type="Area2D"]
+script = ExtResource("1_olwj8")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 5000)
+rotation = 3.14159
+texture = ExtResource("2_wdani")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, 5133)
+shape = SubResource("CircleShape2D_nix7o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_l1q1f")
+}

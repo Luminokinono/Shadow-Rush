@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://cqtg3h3l222s"]
+
+[ext_resource type="Script" uid="uid://w5vp2dqc4udi" path="res://ennemi.gd" id="1_m0ij1"]
+[ext_resource type="Texture2D" uid="uid://dmv5hojngotf0" path="res://walk2 ennemi.png" id="3_527yo"]
+[ext_resource type="Texture2D" uid="uid://dnab2j5jsullh" path="res://walk 3 ennemi.png" id="3_qswgi"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f4r7o"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_527yo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qswgi")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qswgi"]
+size = Vector2(337, 583.5)
+
+[node name="Ennemi" type="Area2D"]
+script = ExtResource("1_m0ij1")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(114.5, 118)
+scale = Vector2(0.776367, 0.769531)
+sprite_frames = SubResource("SpriteFrames_f4r7o")
+animation = &"walk"
+frame = 1
+frame_progress = 0.31534
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(90.5, 125.75)
+shape = SubResource("RectangleShape2D_qswgi")
+
+[node name="PatrolStart" type="Node2D" parent="."]
+position = Vector2(-618, 99)
+
+[node name="PatrolEnd" type="Node2D" parent="."]
+position = Vector2(552, 109)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
