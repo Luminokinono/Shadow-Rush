@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://c5yq4rmejrn8u"]
+
+[ext_resource type="Script" uid="uid://b1dh4hg8p0e3p" path="res://player.gd" id="1_sweqy"]
+[ext_resource type="Texture2D" uid="uid://ck43fay3n1u2d" path="res://ko ninja.png" id="2_1jxqw"]
+[ext_resource type="Texture2D" uid="uid://cqbklkpsai41u" path="res://Personnage au repos.png" id="2_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://cbflnepw4yq0u" path="res://jump.png" id="3_1jxqw"]
+[ext_resource type="Texture2D" uid="uid://c0kc34f2smqc" path="res://marche 1.png" id="4_dw050"]
+[ext_resource type="Texture2D" uid="uid://y5ojw5hcs4qk" path="res://marche 2.png" id="5_b26j0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7dm0k"]
+size = Vector2(269, 482)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0xm2m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1jxqw")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2hs0m")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_1jxqw")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_dw050")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_b26j0")
+}],
+"loop": false,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(6, -14)
+script = ExtResource("1_sweqy")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-176.5, -222)
+shape = SubResource("RectangleShape2D_7dm0k")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(1, 1)
+zoom = Vector2(0.2, 0.2)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-196.698, -238.625)
+scale = Vector2(0.523568, 0.532227)
+sprite_frames = SubResource("SpriteFrames_0xm2m")
+animation = &"death"
